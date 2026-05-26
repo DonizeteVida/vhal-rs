@@ -3,12 +3,19 @@
 version = 4
 
 [[package]]
-name = "plugin_apx_generator"
+name = "apx2rust"
+version = "0.1.0"
+dependencies = [
+ "implementation",
+]
+
+[[package]]
+name = "implementation"
 version = "0.1.0"
 
 [[package]]
 name = "vhal-rs"
 version = "0.1.0"
 dependencies = [
- "plugin_apx_generator",
+ "apx2rust",
 ]

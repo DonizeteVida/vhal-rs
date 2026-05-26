@@ -1,5 +1,5 @@
-use plugin_apx_generator::hello_from_module;
+use apx2rust::hello_from_generator;
 
 fn main() {
-    hello_from_module();
+    hello_from_generator();
 }

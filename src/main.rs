@@ -1,3 +1,5 @@
+use plugin_apx_generator::hello_from_module;
+
 fn main() {
-    println!("Hello, world!");
+    hello_from_module();
 }

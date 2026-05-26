@@ -3,5 +3,12 @@
 version = 4
 
 [[package]]
+name = "plugin_apx_generator"
+version = "0.1.0"
+
+[[package]]
 name = "vhal-rs"
 version = "0.1.0"
+dependencies = [
+ "plugin_apx_generator",
+]

@@ -1,0 +1,89 @@
+// ChatGPT generated from apx.spec
+
+<document> ::= <apx_header> "\n" <statements>
+
+<apx_header> ::= "APX/1.2"
+
+<statements> ::= <statement> "\n"
+               | <statement> "\n" <statements>
+
+<statement> ::= <node_declaration>
+              | <type_declaration>
+              | <require_port_declaration>
+              | <provide_port_declaration>
+
+<node_declaration> ::= "N" <name>
+
+<type_declaration> ::= "T" <name> <type_signature>
+                     | "T" <name> <type_signature> ":" <type_attributes>
+
+<require_port_declaration> ::= "R" <name> <type_signature>
+                             | "R" <name> <type_signature> ":" <port_attributes>
+
+<provide_port_declaration> ::= "P" <name> <type_signature>
+                              | "P" <name> <type_signature> ":" <port_attributes>
+
+<name> ::= "\"" <name_chars> "\""
+
+<names> ::= <name>
+          | <name> "," <names>
+
+<name_chars> ::= <name_char>
+               | <name_char> <name_chars>
+
+<name_char> ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m"
+              | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+              | "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M"
+              | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+              | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+              | "_"
+              | "-"
+
+<type_signature> ::= <primitive_type>
+                   | <primitive_type> "[" <one_nine> <digits> "]"
+                   | "T[" <digits> "]"
+                   | "{" <record_elements> "}"
+
+<primitive_type> ::= "c" | "s" | "l" | "u" | "C" | "S" | "L" | "U"
+
+<record_elements> ::= <name> <type_signature>
+                    | <name> <type_signature> "," <record_elements>
+
+<type_attributes> ::= <type_attribute>
+                    | <type_attribute> "," <type_attributes>
+
+<type_attribute> ::= "VT" "(" <names> ")"
+
+<port_attributes> ::= <port_attribute>
+                    | <port_attribute> "," <port_attributes>
+
+<port_attribute> ::= "=" <integer>
+                   | "=" <string_literal>
+
+<integer> ::= <digit>
+            | <one_nine> <digits>
+            | "-" <digit>
+            | "-" <one_nine> <digits>
+            | "0x" <hex_digits>
+
+<digits> ::= <digit>
+           | <digit> <digits>
+
+<digit> ::= "0" | <one_nine>
+
+<one_nine> ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+<hex_digits> ::= <hex_digit>
+               | <hex_digit> <hex_digits>
+
+<hex_digit> ::= <digit>
+              | "a" | "b" | "c" | "d" | "e" | "f"
+              | "A" | "B" | "C" | "D" | "E" | "F"
+
+<string_literal> ::= "\"" "\""
+                   | "\"" <characters> "\""
+
+<characters> ::= <character>
+               | <character> <characters>
+
+<character> ::= any ASCII character from 0x20 to 0x7F except "\""

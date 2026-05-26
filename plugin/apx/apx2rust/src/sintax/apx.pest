@@ -1,0 +1,75 @@
+// ChatGPT generated from apx.spec
+
+document = { header ~ NEWLINE ~ statements* }
+
+header = { "APX/1.2" }
+
+statements = { statement ~ (NEWLINE ~ statement)* ~ NEWLINE? }
+
+statement = { node_decl | type_decl | req_port_decl | prov_port_decl }
+
+node_decl = { "N" ~ name }
+
+type_decl = {
+    "T" ~ name ~ type_signature ~ (":" ~ type_attributes)?
+}
+
+req_port_decl = {
+    "R" ~ name ~ type_signature ~ (":" ~ port_attributes)?
+}
+
+prov_port_decl = {
+    "P" ~ name ~ type_signature ~ (":" ~ port_attributes)?
+}
+
+name = { "\"" ~ name_chars ~ "\"" }
+
+name_chars = { name_char+ }
+
+name_char = _{ ASCII_ALPHANUMERIC | "_" | "-" }
+
+type_signature = {
+      primitive_type
+    | primitive_type ~ "[" ~ one_nine ~ digits ~ "]"
+    | "T[" ~ digits ~ "]"
+    | "{" ~ record_elements ~ "}"
+}
+
+primitive_type = { "c" | "s" | "l" | "u" | "C" | "S" | "L" | "U" }
+
+record_elements = {
+    name ~ type_signature ~ ("," ~ record_elements)?
+}
+
+type_attributes = {
+    type_attribute ~ ("," ~ type_attribute)*
+}
+
+type_attribute = { "VT" ~ "(" ~ names ~ ")" }
+
+names = { name ~ ("," ~ name)* }
+
+port_attributes = {
+    port_attribute ~ ("," ~ port_attribute)*
+}
+
+port_attribute = { "=" ~ integer | "=" ~ string_literal }
+
+integer = {
+      "0x" ~ hex_digits
+    | "-"? ~ (one_nine ~ digits | digit)
+}
+
+digits = { digit+ }
+
+digit = { "0" | one_nine }
+
+one_nine = { '1'..'9' }
+
+hex_digits = { hex_digit+ }
+
+hex_digit = { digit | 'a'..'f' | 'A'..'F' }
+
+string_literal = { "\"" ~ (!"\"" ~ ANY)* ~ "\"" }
+
+NEWLINE = _{ "\n" }

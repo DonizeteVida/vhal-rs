@@ -1,3 +1,1 @@
-pub fn hello_from_module() {
-    println!("Hello World")
-}
+include!(concat!(env!("OUT_DIR"), "/generated.rs"));
